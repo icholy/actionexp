@@ -22,6 +22,7 @@ on:
           - v1
       commit:
         type: branch
+        default: 'master'
         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
