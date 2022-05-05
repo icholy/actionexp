@@ -10,6 +10,7 @@ on:
         required: true
         type: environment
       ref:
+        description: Release Branch
         default: master
         required: true
 
