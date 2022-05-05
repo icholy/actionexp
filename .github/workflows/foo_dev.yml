@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./service/foo
+        working-directory: service/foo
     steps:
       - uses: actions/checkout@v3
 
