@@ -5,14 +5,10 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: Stage
+        description: Environment
         default: staging
         required: true
-        type: choice
-        options:
-          - dev
-          - staging
-          - v1
+        type: environment
       ref:
         default: master
         required: true
@@ -25,5 +21,7 @@ jobs:
         working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.inputs.ref}}
       - run: ./build.sh
       - run: ./deploy.sh
