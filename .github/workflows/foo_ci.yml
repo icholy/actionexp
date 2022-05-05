@@ -17,6 +17,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: foo/dev
     env:
       STAGE: dev
     defaults:

@@ -7,18 +7,22 @@ on:
       ref:
         description: Release Branch
         required: true
-      environment:
+      stage:
         description: Stage
         default: staging
         required: true
-        type: environment
+        type: choice
+        options:
+          - dev
+          - staging
+          - v1
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: foo/${{ github.event.inputs.stage }}
     env:
-      STAGE: ${{ github.event.inputs.environment }}
+      STAGE: ${{ github.event.inputs.stage }}
     defaults:
       run:
         working-directory: services/foo
