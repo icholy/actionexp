@@ -4,7 +4,7 @@ name: CI / Foo / Dev
 on:
   push:
     branches: [ master ]
-    paths: [ 'services/foo' ]
+    paths: [ 'services/foo/**' ]
   pull_request:
     branches: [ master ]
     paths: [ 'service/foo/**' ]
