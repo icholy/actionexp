@@ -38,5 +38,5 @@ jobs:
         run: echo 'Testing'
 
       - name: Deploy
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         run: echo 'Deploying ${{github.event.inputs.stage}}'
