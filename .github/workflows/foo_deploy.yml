@@ -1,5 +1,5 @@
 
-name: CI / Foo / Release
+name: Foo / Deploy
 
 on:
   workflow_dispatch:
