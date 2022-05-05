@@ -42,4 +42,4 @@ jobs:
         run: echo 'Building ${{github.event.inputs.commit}}'
 
       - name: Deploy
-        run: echo 'Deploying ${{github.event.inputs.environment}}'
+        run: echo 'Deploying ${{github.event.inputs.stage}}'
