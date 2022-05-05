@@ -9,6 +9,10 @@ on:
     branches: [ master ]
     paths: [ 'service/foo/**' ]
   workflow_dispatch:
+    inputs:
+      deploy:
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -21,6 +25,6 @@ jobs:
       - run: ./build.sh
       - run: ./test.sh
       - run: ./deploy.sh
-        if: github.event_name != 'pull_request'
+        if: ${{ github.event_name == 'push' || github.event.inputs.deploy }}
         
 
