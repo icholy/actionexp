@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: Environment
+        description: Stage
         default: staging
         required: true
         type: environment
