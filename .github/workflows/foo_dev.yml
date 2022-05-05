@@ -7,7 +7,7 @@ on:
     paths: [ 'services/foo/**' ]
   pull_request:
     branches: [ master ]
-    paths: [ 'service/foo/**' ]
+    paths: [ 'services/foo/**' ]
   workflow_dispatch:
     inputs:
       deploy:
