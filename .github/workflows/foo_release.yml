@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: service/foo
+        working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
       - run: ./build.sh
