@@ -6,7 +6,6 @@ on:
     inputs:
       ref:
         description: Release Branch
-        default: master
         required: true
       stage:
         description: Stage
