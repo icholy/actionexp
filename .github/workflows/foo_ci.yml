@@ -17,6 +17,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      STAGE: dev
     defaults:
       run:
         working-directory: services/foo
