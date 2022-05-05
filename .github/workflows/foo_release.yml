@@ -4,15 +4,15 @@ name: CI / Foo / Release
 on:
   workflow_dispatch:
     inputs:
+      ref:
+        description: Release Branch
+        default: master
+        required: true
       stage:
         description: Stage
         default: staging
         required: true
         type: environment
-      ref:
-        description: Release Branch
-        default: master
-        required: true
 
 jobs:
   deploy:
