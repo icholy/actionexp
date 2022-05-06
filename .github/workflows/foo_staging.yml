@@ -15,6 +15,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: foo/staging
+    permissions: write-all
     defaults:
       run:
         working-directory: services/foo
@@ -24,14 +25,6 @@ jobs:
           ref: ${{github.event.inputs.ref}}
       - run: ./build.sh
       - run: ./deploy.sh
-      - name: Advance nightly tag
-        uses: actions/github-script@v3
+      - uses: EndBug/latest-tag@latest
         with:
-          github-token: ${{github.token}}
-          script: |
-            await github.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/deployed/foo/staging",
-              sha: context.sha
-            })
+          tag-name: deployed/foo/staging
