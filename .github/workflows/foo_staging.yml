@@ -29,15 +29,6 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            try {
-              await github.git.deleteRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: "tags/deployed/foo/staging"
-              })
-            } catch (e) {
-              console.log("The nightly tag doesn't exist yet: " + e)
-            }
             await github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
