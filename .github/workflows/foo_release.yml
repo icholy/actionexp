@@ -21,6 +21,7 @@ jobs:
           BRANCH="release/foo/$(date +'%F-%s')"
           git switch -c $BRANCH
           git push -u origin $BRANCH
+    deploy:
       - uses: ./.github/workflows/foo_staging
         with:
           ref: ${{github.event.inputs.ref}}
