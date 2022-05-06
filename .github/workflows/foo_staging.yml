@@ -10,11 +10,6 @@ on:
         description: Release Branch
         type: string
         required: true
-  workflow_call:
-    inputs:
-      ref:
-        required: true
-        type: string
 
 jobs:
   deploy:
