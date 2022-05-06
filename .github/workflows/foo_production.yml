@@ -1,26 +1,18 @@
 
-name: Foo / Deploy
+name: Foo / CI / Production
 
 on:
   workflow_dispatch:
     inputs:
       ref:
         description: Release Branch
+        default: deployed/foo/staging
         required: true
-      stage:
-        description: Stage
-        default: staging
-        required: true
-        type: choice
-        options:
-          - dev
-          - staging
-          - v1
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: foo/${{ github.event.inputs.stage }}
+    environment: foo/v1
     env:
       STAGE: ${{ github.event.inputs.stage }}
     defaults:
@@ -33,3 +25,6 @@ jobs:
       - run: echo Deploying to $STAGE
       - run: ./build.sh
       - run: ./deploy.sh
+      - uses: EndBug/latest-tag@latest
+        with:
+          tag-name: deployed/foo/v1
