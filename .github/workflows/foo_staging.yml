@@ -27,7 +27,7 @@ jobs:
       - name: Advance nightly tag
         uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{github.token}}
           script: |
             await github.git.createRef({
               owner: context.repo.owner,
