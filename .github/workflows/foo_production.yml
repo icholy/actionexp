@@ -13,6 +13,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: foo/v1
+    concurrency: foo/v1
     permissions: write-all
     defaults:
       run:
