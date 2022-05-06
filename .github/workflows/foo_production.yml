@@ -13,8 +13,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: foo/v1
-    env:
-      STAGE: ${{ github.event.inputs.stage }}
     defaults:
       run:
         working-directory: services/foo
