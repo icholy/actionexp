@@ -5,7 +5,7 @@ on:
   push:
     branches: [ 'release/foo/*' ]
   workflow_dispatch:
-    input:
+    inputs:
       ref:
         description: Release Branch
         type: string
