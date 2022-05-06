@@ -1,3 +1,3 @@
 # Service Foo
 
-> This service does nothing
+> This service does nothing. Release.
