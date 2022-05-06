@@ -1,0 +1,20 @@
+name: Foo / Release Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Ref
+        type: string
+        required: true
+        default: master
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git switch -c release/foo/$(date +'%F-%s')
+          git push
+
+
