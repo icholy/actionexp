@@ -24,6 +24,23 @@ jobs:
           ref: ${{github.event.inputs.ref}}
       - run: ./build.sh
       - run: ./deploy.sh
-      - uses: EndBug/latest-tag@latest
+      - name: Advance nightly tag
+        uses: actions/github-script@v3
         with:
-          tag-name: deployed/foo/staging
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            try {
+              await github.git.deleteRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: "tags/deployed/foo/staging"
+              })
+            } catch (e) {
+              console.log("The nightly tag doesn't exist yet: " + e)
+            }
+            await github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/deployed/foo/staging",
+              sha: context.sha
+            })
