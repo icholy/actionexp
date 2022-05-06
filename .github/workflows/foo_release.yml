@@ -17,7 +17,7 @@ jobs:
         with:
           ref: ${{github.event.inputs.ref}}
       - run: |
-          local BRANCH="release/foo/$(date +'%F-%s')"
+          BRANCH="release/foo/$(date +'%F-%s')"
           git switch -c $BRANCH
           git push -u origin $BRANCH
 
