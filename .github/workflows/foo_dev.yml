@@ -9,6 +9,11 @@ on:
     branches: [ master ]
     paths: [ 'services/foo/**' ]
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, Tag, or Commit
+        type: string
+        default: string
 
 jobs:
   build:
@@ -20,6 +25,8 @@ jobs:
         working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: $${{github.event.inputs.ref}}
       - run: ./build.sh
       - run: ./test.sh
       - run: ./deploy.sh
