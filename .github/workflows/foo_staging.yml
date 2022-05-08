@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: Release Branch
+        description: Branch, Tag, or Commit
         type: string
         required: true
 
