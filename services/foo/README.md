@@ -1,3 +1,3 @@
 # Service Foo
 
-> This service does nothing. 1
+> This service does nothing.
