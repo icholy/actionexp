@@ -14,7 +14,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: foo/staging
+    environment: staging
     concurrency: foo/staging
     permissions: write-all
     defaults:
