@@ -34,8 +34,6 @@ jobs:
         working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: $${{ github.event.inputs.ref }}
       - run: ./build.sh
       - run: ./test.sh
 
@@ -50,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: $${{ github.event.inputs.ref }}
+          ref: $${{ github.event.inputs.ref || github.ref }}
       - run: ./build.sh
       - run: ./test.sh
       - run: ./deploy.sh
@@ -67,7 +65,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{github.event.inputs.ref}}
+          ref: $${{ github.event.inputs.ref || github.ref }}
+      - run: echo Ref Name $${
       - run: ./build.sh
       - run: ./deploy.sh
       - uses: EndBug/latest-tag@v1
@@ -86,7 +85,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{github.event.inputs.ref}}
+          ref: $${{ github.event.inputs.ref }}
       - run: echo Deploying to $STAGE
       - run: ./build.sh
       - run: ./deploy.sh
