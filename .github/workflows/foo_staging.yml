@@ -1,0 +1,31 @@
+
+name: Foo / CI / Staging
+
+on:
+  push:
+    branches: [ 'release/foo/*' ]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, Tag, or Commit
+        type: string
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    concurrency: foo/staging
+    permissions: write-all
+    defaults:
+      run:
+        working-directory: services/foo
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.inputs.ref}}
+      - run: ./build.sh
+      - run: ./deploy.sh
+      - uses: EndBug/latest-tag@v1
+        with:
+          tag-name: deployed/foo/staging
