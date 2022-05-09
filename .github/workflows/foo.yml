@@ -58,32 +58,38 @@ jobs:
   staging:
     if $${{ github.events.inputs.env == 'staging' || startsWith(github.ref_name, 'release/foo') }}
     runs-on: ubuntu-latest
-    environment: v1
+    environment: staging
     concurrency: foo/staging
+    permissions: write-all
     defaults:
       run:
         working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: $${{ github.event.inputs.ref }}
+          ref: ${{github.event.inputs.ref}}
       - run: ./build.sh
-      - run: ./test.sh
       - run: ./deploy.sh
-
+      - uses: EndBug/latest-tag@v1
+        with:
+          tag-name: deployed/foo/staging
 
   production:
     if ${{ github.events.inputs.env == 'v1' }}
     runs-on: ubuntu-latest
     environment: v1
     concurrency: foo/v1
+    permissions: write-all
     defaults:
       run:
         working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: $${{ github.event.inputs.ref }}
+          ref: ${{github.event.inputs.ref}}
+      - run: echo Deploying to $STAGE
       - run: ./build.sh
-      - run: ./test.sh
       - run: ./deploy.sh
+      - uses: EndBug/latest-tag@v1
+        with:
+          tag-name: deployed/foo/v1
