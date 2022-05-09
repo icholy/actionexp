@@ -3,7 +3,10 @@ name: Foo / CI / Staging
 
 on:
   push:
-    branches: [ 'release/foo/*' ]
+    branches:
+      - 'release/foo/*'
+      - '!*hotfix*'
+
   workflow_dispatch:
     inputs:
       ref:
