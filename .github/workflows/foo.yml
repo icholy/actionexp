@@ -56,7 +56,7 @@ jobs:
       - run: ./deploy.sh
 
   staging:
-    if $${{ github.events.inputs.env == 'staging' || startsWith(github.ref_name, 'release/foo') }}
+    if: $${{ github.events.inputs.env == 'staging' || startsWith(github.ref_name, 'release/foo') }}
     runs-on: ubuntu-latest
     environment: staging
     concurrency: foo/staging
@@ -75,7 +75,7 @@ jobs:
           tag-name: deployed/foo/staging
 
   production:
-    if ${{ github.events.inputs.env == 'v1' }}
+    if: ${{ github.events.inputs.env == 'v1' }}
     runs-on: ubuntu-latest
     environment: v1
     concurrency: foo/v1
