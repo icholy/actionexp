@@ -64,7 +64,7 @@ jobs:
         working-directory: services/foo
     steps:
       - uses: actions/checkout@v3
-      - run: echo Ref Name: ${{ github.ref_name }}
+      - run: 'echo "Ref Name: ${{ github.ref_name }}"'
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
       - run: ./build.sh
