@@ -38,7 +38,7 @@ jobs:
       - run: ./test.sh
 
   dev:
-    if: ${{ github.event.inputs.stage == 'dev' || github.ref_name == 'master' }}
+    if: ${{ github.event.inputs.stage == 'dev' || (github.event_name == 'push' && github.ref_name == 'master') }}
     runs-on: ubuntu-latest
     environment: dev
     concurrency: foo/dev
@@ -55,7 +55,7 @@ jobs:
       - run: ./deploy.sh
 
   staging:
-    if: ${{ github.events.inputs.stage == 'staging' || startsWith(github.ref_name, 'release/foo') }}
+    if: ${{ github.events.inputs.stage == 'staging' || (github.event_name == 'push' && startsWith(github.ref_name, 'release/foo')) }}
     runs-on: ubuntu-latest
     environment: staging
     concurrency: foo/staging
