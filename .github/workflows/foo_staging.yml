@@ -26,6 +26,6 @@ jobs:
           ref: ${{github.event.inputs.ref}}
       - run: ./build.sh
       - run: ./deploy.sh
-      - uses: EndBug/latest-tag@latest
+      - uses: EndBug/latest-tag@v1
         with:
           tag-name: deployed/foo/staging
