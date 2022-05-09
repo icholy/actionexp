@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{github.event.inputs.ref}}
+          ref: ${{ github.event.inputs.ref }}
       - run: echo Deploying to $STAGE
       - run: ./build.sh
       - run: ./deploy.sh
