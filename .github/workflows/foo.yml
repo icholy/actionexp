@@ -17,6 +17,7 @@ on:
           - dev
           - staging
           - v1
+        required: true
       ref:
         description: Branch, Tag, or Commit
         type: string
