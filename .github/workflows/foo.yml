@@ -1,5 +1,5 @@
 
-name: Foo / CI
+name: Foo
 
 on:
   push:
