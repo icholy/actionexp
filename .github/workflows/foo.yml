@@ -46,6 +46,7 @@ jobs:
       run:
         working-directory: services/foo
     steps:
+      - run: echo ${{ github.ref_name }}
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
@@ -63,7 +64,6 @@ jobs:
       run:
         working-directory: services/foo
     steps:
-      - run: echo ${{ github.ref_name }}
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
