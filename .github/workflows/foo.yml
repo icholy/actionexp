@@ -1,0 +1,89 @@
+
+name: Foo / CI
+
+on:
+  push:
+    branches: [ master, 'release/foo/*' ]
+    paths: [ 'services/foo/**' ]
+  pull_request:
+    branches: [ master ]
+    paths: [ 'services/foo/**' ]
+  workflow_dispatch:
+    inputs:
+      env:
+        description: Deployment Environment
+        type: choice
+        default: dev
+        options:
+          - dev
+          - staging
+          - v1
+      ref:
+        description: Branch, Tag, or Commit
+        type: string
+        required: true
+
+jobs:
+
+  test:
+    if: $${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    environment: dev
+    defaults:
+      run:
+        working-directory: services/foo
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: $${{ github.event.inputs.ref }}
+      - run: ./build.sh
+      - run: ./test.sh
+
+  dev:
+    if: $${{ github.event.inputs.env == 'dev' || github.ref_name == 'master' }}
+    runs-on: ubuntu-latest
+    environment: dev
+    concurrency: foo/dev
+    defaults:
+      run:
+        working-directory: services/foo
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: $${{ github.event.inputs.ref }}
+      - run: ./build.sh
+      - run: ./test.sh
+      - run: ./deploy.sh
+
+  staging:
+    if $${{ github.events.inputs.env == 'staging' || startsWith(github.ref_name, 'release/foo') }}
+    runs-on: ubuntu-latest
+    environment: v1
+    concurrency: foo/staging
+    defaults:
+      run:
+        working-directory: services/foo
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: $${{ github.event.inputs.ref }}
+      - run: ./build.sh
+      - run: ./test.sh
+      - run: ./deploy.sh
+
+
+  production:
+    if ${{ github.events.inputs.env == 'v1' }}
+    runs-on: ubuntu-latest
+    environment: v1
+    concurrency: foo/v1
+    defaults:
+      run:
+        working-directory: services/foo
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: $${{ github.event.inputs.ref }}
+      - run: ./build.sh
+      - run: ./test.sh
+      - run: ./deploy.sh
