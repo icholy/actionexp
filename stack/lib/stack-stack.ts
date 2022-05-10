@@ -1,16 +1,13 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
+import { User } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
-export class StackStack extends Stack {
+export class GithubActionsUsersStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'StackQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    new User(this, 'GithubActionsDev', { userName: 'github-actions-dev' });
+    new User(this, 'GithubActionsStaging', { userName: 'github-actions-staging' });
+    new User(this, 'GithubActionsProd', { userName: 'github-actions-prod' });
   }
 }
